@@ -161,7 +161,7 @@
 
                     <input type="submit" value="Register" name="register">
 
-                    <p>By registering, I gree to the <a href="">terms</a> and <a href="">condition</a>.</p>
+                    <p>By registering, I gree to the <a href="">terms</a> and <a href="">conditions</a>.</p>
 
                 </form>
             

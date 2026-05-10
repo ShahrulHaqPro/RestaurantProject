@@ -90,6 +90,7 @@ function createNewBillRecord($table_id)
                                         echo "<th>Category</th>";
                                         echo "<th>Price</th>";
                                         echo "<th>Add</th>";
+                                        echo "<th>Add Mul</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -121,12 +122,25 @@ function createNewBillRecord($table_id)
                                                         <input type="text" name= "table_id" value="' . $table_id . '" hidden>
                                                         <input type="text" name="item_id" value=' . $row['item_id'] . ' hidden>
                                                         <input type="number" name= "bill_id" value=' . $bill_id . ' hidden>
-                                                        <input type="number" name="quantity" placeholder="1 to 1000" required min="1" max="1000">
+                                                        <input type="hidden" value=1 name="quantity" placeholder="1 to 1000" required min="1" max="1000">
                                                         <input type="hidden" name="addToCart" value="1">
-                                                        <button type="submit" class="btn edit">Add to Cart</button>';
+                                                        <button type="submit" class="btn edit">⇧</button>';
                                             echo "</form>
                                                     </td>";
+
+
+                                            echo '<td class="addMulItem">
+                                                    <form method="get" action="addItemMul.php">
+                                                        <input type="text" name= "table_id" value="' . $table_id . '" hidden>
+                                                        <input type="text" name="item_id" value=' . $row['item_id'] . ' hidden>
+                                                        <input type="number" name= "bill_id" value=' . $bill_id . ' hidden>
+                                                        <input type="number" name="quantity" placeholder="1-1000" required min="1" max="1000">
+                                                        <input type="hidden" name="addToCart" value="1">
+                                                        <button type="submit" class="btn edit">⇨∣</button>';
+                                            echo "</form>
+                                                    </td>";        
                                         } else {
+                                            echo '<td>Bill Paid</td>';
                                             echo '<td>Bill Paid</td>';
                                         }
 
@@ -160,7 +174,8 @@ function createNewBillRecord($table_id)
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
-                                <th>Action</th>
+                                <th>Reduce</th>
+                                <th>Remove</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -188,6 +203,7 @@ function createNewBillRecord($table_id)
                                     echo '<td>LKR ' . number_format($item_price, 2) . '</td>';
                                     echo '<td>' . $quantity . '</td>';
                                     echo '<td>LKR ' . number_format($total, 2) . '</td>';
+                                    
 
                                     // Check if the bill has been paid
                                     $payment_time_query = "SELECT payment_time FROM Bills WHERE bill_id = '$bill_id'";
@@ -203,14 +219,25 @@ function createNewBillRecord($table_id)
 
                                     // Display the "Delete" button if the bill hasn't been paid
                                     if (!$has_payment_time) {
+                                        //reduce btn
+                                        echo '<td>';
+                                        echo '<div class="action-buttons" >';
+                                        echo '<a id="reduceBtn" class="btn view reduceBtn" data-quantity="' . $quantity . '" href="reduceItemFromCart.php?bill_id=' . $bill_id . '&table_id=' . $table_id . '&bill_item_id=' . $bill_item_id . '&item_id=' . $item_id . '">
+                                                ⇩
+                                            </a>';
+                                        echo '</div>';
+                                        echo '</td>';
+
+                                        //remove button
                                         echo '<td>';
                                         echo '<div class="action-buttons">';
                                         echo '<a class="btn delete" href="deleteItem.php?bill_id=' . $bill_id . '&table_id=' . $table_id . '&bill_item_id=' . $bill_item_id . '&item_id=' . $item_id . '">
-                                                        Delete
-                                                        </a>';
+                                                ✕
+                                            </a>';
                                         echo '</div>';
                                         echo '</td>';
                                     } else {
+                                        echo '<td>Bill Paid</td>';
                                         echo '<td>Bill Paid</td>';
                                     }
                                     echo '</tr>';
@@ -219,6 +246,22 @@ function createNewBillRecord($table_id)
                                 echo '<tr><td colspan="6">No Items in Cart.</td></tr>';
                             }
                             ?>
+
+                           <script>
+                                document.querySelectorAll(".reduceBtn").forEach(btn => {
+                                    const quantity = parseInt(btn.dataset.quantity);
+
+                                    if (quantity === 1) {
+                                    btn.classList.remove("view");
+                                    btn.classList.add("reduce");
+                                    } else if (quantity > 1) {
+                                    btn.classList.remove("reduce");
+                                    btn.classList.add("view");
+                                    }
+                                });
+                            </script>
+
+
                         </tbody>
                     </table>
 
@@ -279,5 +322,28 @@ function createNewBillRecord($table_id)
         </div>
     </div>
 </div>
-
+<style>
+    .btn{
+        font-size: 20px;
+    }
+    .reduceBtn.reduce {
+        color: #ddddddff;
+        background-color: #929292ff;
+        text-decoration: none;
+    }
+    .addMulItem form{
+        display:flex;
+        flex-direction:row;
+        width: 130px;
+        gap:5px;
+    }
+    .addMulItem input{
+        height: 30px;
+        width: 60px;
+        border-radius: 8px;
+        padding-inline: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 <?php include '../inc/dashFooter.php'; ?>

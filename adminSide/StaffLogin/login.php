@@ -64,9 +64,11 @@ if(isset($_SESSION['logged_account_id'])) {
                     
                     <input type="submit" value="Login">
                 </form>
-
-                <p>Staff Only.<a href="../../customerSide/home/home.php">To Home Page</a>.</p>
-
+                <!-- <div style="display:flex; justify-content:space-between;"> -->
+                    <!-- <p>Staff Only</p> -->
+                    <p><a href="../../customerSide/home/home.php">Home</a></p>
+                <!-- </div> -->
+                
             </div>
         </div>
     </section>

@@ -144,7 +144,7 @@ session_start();
                                     <label for="reservation_date">Select Date</label>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="date" id="reservation_date" name="reservation_date" required>
+                                    <input class="" type="date" id="reservation_date" name="reservation_date" required>
                                 </td>
                             </tr>
 
@@ -155,13 +155,13 @@ session_start();
                                 <td>
                                     <?php
                                     $availableTimes = array();
-                                    for ($hour = 10; $hour <= 20; $hour++) {
+                                    for ($hour = 5; $hour <= 22; $hour++) {
                                         for ($minute = 0; $minute < 60; $minute += 60) {
                                             $time = sprintf('%02d:%02d:00', $hour, $minute);
                                             $availableTimes[] = $time;
                                         }
                                     }
-                                    echo '<select name="reservation_time" id="reservation_time" class="form-control" >';
+                                    echo '<select name="reservation_time" id="reservation_time" class="" >';
                                     echo '<option value="" selected disabled>Select a Time</option>';
                                     foreach ($availableTimes as $time) {
                                         echo "<option  value='$time'>$time</option>";
@@ -201,7 +201,7 @@ session_start();
                                     <label for="customer_name">Customer Name</label>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" id="customer_name" name="customer_name" placeholder="T.K. Perera" required>
+                                    <input class="" type="text" id="customer_name" name="customer_name" placeholder="T.K. Perera" required>
                                 </td>
                             </tr>
                             <?php
@@ -225,7 +225,7 @@ session_start();
                                     <label for="table_id_reserve">Available Tables</label>
                                 </div>
                                 <div class="td">
-                                    <select class="form-control" name="table_id" id="table_id_reserve" required>
+                                    <select class="" name="table_id" id="table_id_reserve" required>
                                         <option value="" selected disabled>Select a Table</option>
                                         <?php
                                         $table_id_list = $_GET['reserved_table_id'];
@@ -258,7 +258,7 @@ session_start();
                                     <label for="special_request">Special request</label>
                                 </td>
                                 <td>
-                                    <textarea class="form-control" id="special_request" name="special_request">Need a Child chair</textarea>
+                                    <textarea class="" id="special_request" name="special_request">Need a Child chair</textarea>
                                 </td>
                             </tr>
                             <tr>

@@ -13,6 +13,7 @@ require_once '../config.php';
     }
     .indication-rows {
         display: flex;
+        flex-wrap:wrap;
         justify-content: center;
         flex-direction: row;
         gap: 15px;
