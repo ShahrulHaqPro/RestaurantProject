@@ -4,9 +4,7 @@ A simple restaurant management system project with separate staff and admin acce
 
 ---
 
-## 👨‍💼 Staff Login Credentials
-
-### Customer Service Staff
+### Customer login
 
 | Email | Password |
 |-------|------------|
@@ -15,7 +13,7 @@ A simple restaurant management system project with separate staff and admin acce
 
 ---
 
-### Kitchen / Internal Staff
+## 👨‍💼 Staff Login Credentials
 
 | Staff ID | Password |
 |----------|------------|
